@@ -1,0 +1,43 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+model Blogs {
+  ID Int @id @default(autoincrement())
+  type Brand 
+  category Category
+  title String
+  summary String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  content String
+  image Images[]
+}
+
+model Images {
+  blog   Blogs @relation(fields: [blogID], references: [ID])
+  blogID Int 
+  Image String @unique
+}
+
+enum Brand {
+  Nathan
+  Chloe
+  ChloeNathan
+}
+
+enum Category {
+  life
+  food
+  places
+  attractions
+}
