@@ -3,7 +3,6 @@ import { ArticleItem } from './bloglist'
 
 interface blogdisplay{
     initialList: ArticleItem[],
-    // setFilter: React.Dispatch<React.SetStateAction<ArticleItem[]>>,
     setFilter: any
     filteredArticles: any
 }

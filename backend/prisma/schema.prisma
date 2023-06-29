@@ -13,13 +13,13 @@ datasource db {
 
 model Blogs {
   ID Int @id @default(autoincrement())
-  type Brand 
+  type Brand
   category Category
   title String
   summary String
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  content String
+  updatedAt DateTime
+  content String @db.MediumText
   image Images[]
 }
 

@@ -22,8 +22,11 @@ export default function Home() {
             //Get Chloe's most recent blog
             const chloeList = articleList.filter((item: ArticleItem) => item.type === "Chloe")
             const articleChloe = getRecent(chloeList);
-            setRecentNathan(articleChloe.ID);
+            setRecentChloe(articleChloe.ID);
             //Get Chloe + Nathan's most recent blog
+            const cnList = articleList.filter((item: ArticleItem) => item.type === "ChloeNathan")
+            const articleCN = getRecent(cnList);
+            setRecentCN(articleCN.ID);
         });
   }, []);
 
