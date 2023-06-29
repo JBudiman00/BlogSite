@@ -7,8 +7,12 @@ dotenv.config();
 const app = express();
 app.use(cors());
 const port = process.env.PORT;
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
 const articlesNRouter = require('./routes/articles');
+const verifyRouter = require('./routes/verify');
 app.use('/articles', articlesNRouter);
+app.use('/verify', verifyRouter);
 app.get('/', (req, res) => {
     res.send('Nathan\'s API');
 });

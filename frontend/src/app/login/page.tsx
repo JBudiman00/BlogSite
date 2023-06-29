@@ -8,6 +8,10 @@ export default function Home() {
     const handleSubmit = (event: any) => {
         event.preventDefault();
         //Validate form
+        console.log(process.env.USERNAME1)
+        if(username === process.env.USERNAME1){
+            console.log("YES");
+        }
     }
 
     const handleUsername = (event: any) => {
