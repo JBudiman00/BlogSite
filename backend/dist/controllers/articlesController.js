@@ -11,10 +11,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
+//Get article information (Excludes content for API efficiency) 
 const getArticles = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield prisma.blogs.findMany();
+    const result = yield prisma.blogs.findMany({
+        select: {
+            ID: true,
+            type: true,
+            category: true,
+            title: true,
+            summary: true,
+            createdAt: true,
+            updatedAt: true
+        }
+    });
     res.send(result);
 });
+//Get specific blog content and information
 const getBlog = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield prisma.blogs.findUnique({
         where: {

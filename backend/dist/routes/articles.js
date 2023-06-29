@@ -23,7 +23,6 @@ const articlesController = require('../controllers/articlesController');
  *         - title
  *         - summmary
  *         - createdAt
- *         - content
  *       properties:
  *         id:
  *           type: string
@@ -46,9 +45,6 @@ const articlesController = require('../controllers/articlesController');
  *         updatedAt:
  *           type: datetime
  *           description: Last time the article was updated
- *         content:
- *           type: string
- *           description: Article content
  *       example:
  *         id: 3
  *         type: Nathan
