@@ -1,17 +1,41 @@
 'use client'
 import { useState } from 'react';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
+    const router = useRouter();
     const [username, setUsername] = useState<string>("");
     const [password, setPassword] = useState<string>("");
-
+    const [status, setStatus] = useState<any>();
+    
     const handleSubmit = (event: any) => {
         event.preventDefault();
         //Validate form
-        console.log(process.env.USERNAME1)
-        if(username === process.env.USERNAME1){
-            console.log("YES");
-        }
+        axios.post('http://localhost:8000/verify', {
+            username: username,
+            password: password
+        })
+        .then((item: any) => {
+            //Filter down to only articles by Nathan
+            const result = item.data.verification;
+            if(result == true){
+                router.push('/admin')
+            }else {
+                setStatus(badLogin)
+            }
+        })
+        .catch((error: any) => {
+            console.error(error);
+        });
+    }
+
+    const badLogin = () => {
+        return (
+            <div className="bg-[#EF9A9A] border border-[#F44336] h-12">
+                <p className="text-center">Incorrect username/login</p>
+            </div>
+        );
     }
 
     const handleUsername = (event: any) => {
@@ -43,7 +67,7 @@ export default function Home() {
                         <div className="flex flex-row">
                             <p className="text-lg mr-2">Password</p>
                             <input 
-                                type="text"
+                                type="password"
                                 value={password}
                                 onChange={handlePassword}
                             />
@@ -51,6 +75,7 @@ export default function Home() {
                         <div className="h-6"></div>
                         <button type="submit" className="bg-[#82614A] text-[#E7DED0] rounded-lg py-1 px-2 w-1/3">Submit</button>
                     </form>
+                    {status}
                 </div>
             </div>
         </div>
