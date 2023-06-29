@@ -1,45 +1,51 @@
-import { ArticleItem } from '../nathan/page';
-import { useRouter } from 'next/navigation';
-import Link from "next/link";
+'use client'
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import BlogDisplay from './blogdisplay';
+import BlogList from './blogitem';
 
-interface IProps {
-    item: ArticleItem
+export interface ArticleItem {
+    ID: number,
+    type: string,
+    category: string,
+    title: string,
+    summary: string,
+    createdAt: string,
+    updatedAt: string | null,
 }
 
-export default function BlogList ({ item }: IProps) {
-    const router = useRouter();
-    const id = item.ID;
-    const type = item.type;
-    const category = item.category;
-    const title = item.title;
-    const summary = item.summary;
-    const createdAt = item.createdAt;
-    const updatedAt = item.updatedAt;
-    const content = item.content;
-    
+export default function Home(props: any) {
+    const [listArticles, setList] = useState<Array<ArticleItem>>([]);
+    const [filteredArticles, setFilter] = useState<Array<ArticleItem>>([]);
+
+    useEffect(() => {
+        axios.get('http://localhost:8000/articles')
+        .then((item: any) => {
+            //Filter down to only articles by Nathan
+            const result = item.data.filter((i: any) => {
+                return i.type === props.type
+            })
+            setList(result);
+            setFilter(result);
+        });
+    }, []);
+
     return (
-        <div className="w-full text-[#82614A]">
-            <div className="grid grid-cols-3">
-                <Link href={({
-                    pathname: "/blog",
-                    query: { id: id}
-                })}>
-                    <p className="text-3xl col-span-1">{title}</p>
-                </Link>
-                <div className="grid col-span-1">
-                    <p className="text-md">{createdAt}</p>
-                </div>
-                <div className="bg-[#9F825B] col-span-1 text-[#E7DED0] justify-self-end rounded-xl px-2">
-                    <p className="text-xl">{category}</p>
-                </div>
-                
-            </div>
-            <div className="flex flex-row text-[#E7DED0]">
-                <img src="placeholder.jpg" className="w-1/3 aspect-video"/>
-                <div className="w-2/3 px-3 mx-4 my-2 bg-[#9F825B] rounded-xl">
-                    <p className="text-lg">{summary}</p>
+        <>
+            <BlogDisplay initialList={listArticles} setFilter={setFilter} filteredArticles={filteredArticles}/>
+            <div className="flex justify-center">
+                <div className="w-2/3">
+                    {filteredArticles.map((item: ArticleItem) =>{
+                        return (
+                            <>
+                                <BlogList item={item}/>
+                                <div className="h-12"></div>
+                            </>
+                        );
+                    })}
                 </div>
             </div>
-        </div>
-    );
+            <div className="h-12"></div>
+        </>
+        );
 }
