@@ -11,7 +11,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
-//Get article information (Excludes content for API efficiency) 
 const getArticles = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield prisma.blogs.findMany({
         select: {
@@ -26,7 +25,6 @@ const getArticles = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     });
     res.send(result);
 });
-//Get specific blog content and information
 const getBlog = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield prisma.blogs.findUnique({
         where: {
@@ -35,7 +33,58 @@ const getBlog = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     });
     res.send(result);
 });
+const postArticles = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        yield prisma.blogs.create({
+            data: req.body
+        });
+        res.send({ message: "Article successfully added" });
+    }
+    catch (e) {
+        console.error(e);
+        res.send(e);
+    }
+});
+const updateArticles = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const result = yield prisma.blogs.update({
+            where: {
+                ID: +req.params.id
+            },
+            data: {
+                type: req.body.type || undefined,
+                category: req.body.category || undefined,
+                title: req.body.title || undefined,
+                summary: req.body.summary || undefined,
+                updatedAt: req.body.updatedAt || undefined,
+                content: req.body.content || undefined,
+            }
+        });
+        res.json(result);
+    }
+    catch (e) {
+        console.error(e);
+        res.send({ error: e });
+    }
+});
+const deleteArticles = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const result = yield prisma.blogs.delete({
+            where: {
+                ID: +req.params.id
+            }
+        });
+        res.send({ message: "Article successfully delete" });
+    }
+    catch (e) {
+        console.error(e);
+        res.send({ error: e });
+    }
+});
 module.exports = {
     getArticles,
-    getBlog
+    getBlog,
+    postArticles,
+    updateArticles,
+    deleteArticles
 };

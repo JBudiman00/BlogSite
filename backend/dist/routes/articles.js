@@ -9,9 +9,13 @@ const articlesController = require('../controllers/articlesController');
  *   /articles:
  *     get:
  *       summmary: Get all article information
- *     responses:
- *       200:
- *         description: OK
+ *       responses:
+ *         200:
+ *           description: OK
+ *           content:
+ *             application/json:
+ *               schema:
+ *                 $ref: '#/components/schemas/Articles'
  * components:
  *   schemas:
  *     Articles:
@@ -69,9 +73,68 @@ router.get('/', articlesController.getArticles);
  *             type: integer
  *           required: true
  *           description: Unique numerical ID of blog article
- *     responses:
- *       200:
- *         description: OK
+ *       responses:
+ *         200:
+ *           description: OK
+ *           content:
+ *             application/json:
+ *               schema:
+ *                 $ref: '#/components/schemas/Articles'
  */
 router.get('/:id', articlesController.getBlog);
+/**
+ * @swagger
+ * paths:
+ *   /articles:
+ *     post:
+ *       summmary: Post article information to database
+ *       responses:
+ *         200:
+ *           description: OK
+ *           content:
+ *             application/json:
+ *               schema:
+ *                 type: object
+ *                 properties:
+ *                   message:
+ *                     type: string
+ *               example:
+ *                 message: Article successfully added
+ */
+router.post('/', articlesController.postArticles);
+/**
+ * @swagger
+ * paths:
+ *   /articles:
+ *     patch:
+ *       summmary: Update article information in database
+ *       responses:
+ *         200:
+ *           description: OK
+ *           content:
+ *             application/json:
+ *               schema:
+ *                 $ref: '#/components/schemas/Articles'
+ */
+router.patch('/:id', articlesController.updateArticles);
+/**
+ * @swagger
+ * paths:
+ *   /articles:
+ *     delete:
+ *       summmary: Delete article information in database by ID
+ *       responses:
+ *         200:
+ *           description: Request handled successfully
+ *           content:
+ *             application/json:
+ *               schema:
+ *                 type: object
+ *                 properties:
+ *                   message:
+ *                     type: string
+ *               example:
+ *                 message: Article successfully delete
+ */
+router.delete('/:id', articlesController.deleteArticles);
 module.exports = router;
