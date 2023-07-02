@@ -1,4 +1,4 @@
-import { ArticleItem } from './bloglist';
+import ArticleItem from '../interface/articleitem';
 import Link from "next/link";
 
 interface IProps {

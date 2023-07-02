@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ArticleItem } from './bloglist'
-
+import ArticleItem from '../interface/articleitem';
 interface blogdisplay{
     initialList: ArticleItem[],
     setFilter: any

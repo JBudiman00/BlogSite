@@ -3,16 +3,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import BlogDisplay from './blogdisplay';
 import BlogList from './blogitem';
-
-export interface ArticleItem {
-    ID: number,
-    type: string,
-    category: string,
-    title: string,
-    summary: string,
-    createdAt: string,
-    updatedAt: string | null,
-}
+import ArticleItem from '../interface/articleitem';
 
 export default function Home(props: any) {
     const [listArticles, setList] = useState<Array<ArticleItem>>([]);

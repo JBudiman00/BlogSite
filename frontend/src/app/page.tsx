@@ -1,7 +1,7 @@
 'use client'
 import BlogBlock from './components/blogblock'
 import { useEffect, useState } from 'react'
-import { ArticleItem } from './components/bloglist';
+import ArticleItem from './interface/articleitem';
 import axios from 'axios';
 
 
