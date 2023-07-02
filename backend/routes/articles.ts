@@ -91,6 +91,13 @@ router.get('/:id', articlesController.getBlog);
  *   /articles:
  *     post:
  *       summmary: Post article information to database
+ *       requestBody:
+ *         description: Required components of creating an Article
+ *         required: true
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Articles'
  *       responses:
  *         200:
  *           description: OK
