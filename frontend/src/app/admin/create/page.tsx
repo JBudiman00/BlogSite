@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import Link from "next/link";
 
 export default function Home() {
     const router = useRouter();
@@ -71,7 +72,14 @@ export default function Home() {
         <div className="h-[calc(100vh-257px)] w-screen text-[#82614A]">
             <div className="flex h-full justify-center items-center">
                 <div className="flex flex-col h-1/2 w-1/3 bg-[#D0BCA0] items-center">
-                    <p className="text-3xl my-5">Create new article</p>
+                    <div className="flex flex-row w-full">
+                        <Link href={({
+                            pathname: "/admin"
+                        })}>
+                            <img src="/backarrow.png" className="w-6 h-6 ml-2 mt-2"/>
+                        </Link>
+                        <p className="text-3xl my-5 flex-grow flex justify-center mr-8">Create new article</p>
+                    </div>
                     <form className="w-1/2" onSubmit={e => onSubmit(e)}>
                         <div className="flex flex-row mb-2">
                             <p className="text-lg mr-2">Title</p>

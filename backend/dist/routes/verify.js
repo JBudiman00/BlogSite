@@ -4,5 +4,5 @@ const express = require('express');
 const router = express.Router();
 //Controllers
 const verifyController = require('../controllers/verifyController');
-router.post('/', verifyController.verify);
+router.post('/', verifyController.login);
 module.exports = router;

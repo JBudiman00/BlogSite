@@ -54,39 +54,41 @@ export default function Home() {
                     </button>
                 </div>
                 <div className="h-2"></div>
-                <div className="flex flex-row text-center">
-                    <p className="border border-black w-12">ID</p>
-                    <p className="border border-black w-28">Type</p>
-                    <p className="border border-black w-24">Category</p>
-                    <p className="border border-black w-28">title</p>
-                    <p className="border border-black w-28">CreatedAt</p>
-                    <p className="border border-black w-28">UpdatedAt</p>
-                    <p className="border border-black w-64">Summary</p>
-                    <p className="border border-black w-28">Options</p>
-                </div>
-                {articleList.map((item: ArticleItem) => {
-                    return (
-                        <div key={item.ID} className="flex flex-row">
-                            <p className="border border-black w-12 text-center">{item.ID}</p>
-                            <p className="border border-black w-28">{item.type}</p>
-                            <p className="border border-black w-24">{item.category}</p>
-                            <p className="border border-black w-28">{item.title}</p>
-                            <p className="border border-black w-28">{new Date(item.createdAt).toLocaleString()}</p>
-                            <p className="border border-black w-28">{new Date(item.updatedAt ? item.updatedAt: "").toLocaleString()}</p>
-                            <p className="border border-black w-64">{item.summary}</p>
-                            <div className="flex flex-row border justify-around border-black w-28">
-                                <img src="editicon.png" className="border border-black m-1 p-1 bg-yellow w-10" onClick={e => editClick(e, item.ID)}/>
-                                <img src="deleteicon.png" className="border border-black m-1 p-1 bg-yellow w-10" onClick={e => deleteToggle(e, item.ID)}/>
+                <div className="flex flex-col items-center">
+                    <div className="flex flex-row text-center">
+                        <p className="border border-black w-12">ID</p>
+                        <p className="border border-black w-28">Type</p>
+                        <p className="border border-black w-24">Category</p>
+                        <p className="border border-black w-28">title</p>
+                        <p className="border border-black w-28">CreatedAt</p>
+                        <p className="border border-black w-28">UpdatedAt</p>
+                        <p className="border border-black w-64">Summary</p>
+                        <p className="border border-black w-28">Options</p>
+                    </div>
+                    {articleList.map((item: ArticleItem) => {
+                        return (
+                            <div key={item.ID} className="flex flex-row">
+                                <p className="border border-black w-12 text-center">{item.ID}</p>
+                                <p className="border border-black w-28">{item.type}</p>
+                                <p className="border border-black w-24">{item.category}</p>
+                                <p className="border border-black w-28">{item.title}</p>
+                                <p className="border border-black w-28">{new Date(item.createdAt).toLocaleString()}</p>
+                                <p className="border border-black w-28">{new Date(item.updatedAt ? item.updatedAt: "").toLocaleString()}</p>
+                                <p className="border border-black w-64">{item.summary}</p>
+                                <div className="flex flex-row border justify-around border-black w-28">
+                                    <img src="editicon.png" className="border border-black m-1 p-1 bg-yellow w-10" onClick={e => editClick(e, item.ID)}/>
+                                    <img src="deleteicon.png" className="border border-black m-1 p-1 bg-yellow w-10" onClick={e => deleteToggle(e, item.ID)}/>
+                                </div>
                             </div>
-                        </div>
-                    );
-                })}
+                        );
+                    })}
+                </div>
                 {isOpen && (
                     <div className="fixed inset-0 flex items-center justify-center z-50">
                         <div className="fixed inset-0 bg-gray-800 opacity-75"></div>
                         <div className="relative bg-white rounded-lg p-2 w-1/2">
                             <div className="flex flex-col items-center">
-                                <p className="text-lg mb-2">Are you sure you want to permantently delete this article permanently?</p>
+                                <p className="text-lg mb-2">Are you sure you want to delete this article permanently?</p>
                                 <button 
                                     className="bg-[#EF9A9A] border border-[#F44336] p-2 mb-6"
                                     onClick={e => deleteClick(e)}
