@@ -23,10 +23,16 @@ export default function BlogList ({ item }: IProps) {
             <div className="grid grid-cols-3">
                 <p className="text-3xl col-span-1">{title}</p>
                 <div className="grid col-span-1">
-                    <p className="text-md">{createdAt.toLocaleString()}</p>
+                    <p className="text-md ml-6 mt-2">{createdAt.toLocaleString()}</p>
                 </div>
-                <div className="bg-[#9F825B] col-span-1 text-[#E7DED0] justify-self-end rounded-xl px-2">
-                    <p className="text-xl">{category}</p>
+                <div className="flex flex-row col-span-1 text-[#E7DED0] justify-self-end">
+                    <div className="bg-[#9F825B] rounded-xl px-2 pt-1">
+                        <p className="text-xl">{type}</p>
+                    </div>
+                    <div className="w-2"></div>
+                    <div className="bg-[#9F825B] rounded-xl px-2 pt-1">
+                        <p className="text-xl">{category}</p>
+                    </div>
                 </div>
             </div>
             

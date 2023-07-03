@@ -17,22 +17,34 @@ export interface Article {
 export default function Home() {
     const searchParams = useSearchParams();
     const [article, setArticle] = useState<Article>();
+    const [type, setType] = useState<string>("");
+    const [date, setDate] = useState<Date | null>(null);
 
     useEffect(() => {
         axios.get('http://localhost:8000/articles/' + searchParams.get("id"))
         .then((item: any) => {
             setArticle(item.data);
-            console.log(item.data.content)
+            if(item.data.type === "Nathan"){
+                setType("Nathan Budiman")
+            } else if(item.data.type === "Chloe") {
+                setType("Chloe Lin")
+            } else {
+                setType("Chloe Lin and Nathan Budiman")
+            }
+            setDate(new Date(item.data.createdAt))
         });
+
     }, [])
 
     return (
         <div className="flex justify-center text-[#82614A]">
             <div className="w-2/3">
                 <div className="h-6"></div>
-                <p className="text-4xl">{article?.title}</p>
-                <p>Created by {article?.type}</p>
-                <div className="whitespace-pre-wrap">
+                <p className="text-5xl">{article?.title}</p>
+                <p className="text-lg">Created by {type}</p>
+                <p className="text-lg">Date: {date?.toLocaleString()}</p>
+                <div className="h-6"></div>
+                <div className="whitespace-pre-wrap text-lg">
                     {article?.content}
                 </div>
                 <div className="h-6"></div>
