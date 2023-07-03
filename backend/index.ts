@@ -3,8 +3,8 @@ const dotenv = require('dotenv');
 const swaggerUi = require('swagger-ui-express'),
 swaggerDocument = require('../swagger');
 var cors = require('cors')
-const passport = require('passport');
-require('./passport');
+// const passport = require('passport');
+// require('./passport');
 dotenv.config();
 
 const app = express();
@@ -17,9 +17,8 @@ app.use(bodyParser.json());
 const articlesRouter = require('./routes/articles');
 const verifyRouter = require('./routes/verify');
 
-app.use('/articles', passport.authenticate('jwt', {session: false}), articlesRouter);
-// app.use('/articles', articlesRouter);
-app.use('/login', verifyRouter);
+app.use('/articles', articlesRouter);
+app.use('/auth', verifyRouter);
 
 app.get('/', (req: Request, res: any) => {
   res.send('Nathan\'s API');

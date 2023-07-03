@@ -1,5 +1,8 @@
 const e = require('express');
 const router = e.Router();
+const passport = require('passport');
+export {}
+require('../passport');
 
 //Controllers
 const articlesController = require('../controllers/articlesController')
@@ -111,7 +114,7 @@ router.get('/:id', articlesController.getBlog);
  *               example:
  *                 message: Article successfully added
  */
-router.post('/', articlesController.postArticles);
+router.post('/', passport.authenticate('jwt', {session: false}), articlesController.postArticles);
 
 /**
  * @swagger
@@ -127,7 +130,7 @@ router.post('/', articlesController.postArticles);
  *               schema:
  *                 $ref: '#/components/schemas/Articles'
  */
-router.patch('/:id', articlesController.updateArticles)
+router.patch('/:id', passport.authenticate('jwt', {session: false}), articlesController.updateArticles)
 
 /**
  * @swagger
@@ -148,6 +151,6 @@ router.patch('/:id', articlesController.updateArticles)
  *               example:
  *                 message: Article successfully delete 
  */
-router.delete('/:id', articlesController.deleteArticles)
+router.delete('/:id', passport.authenticate('jwt', {session: false}), articlesController.deleteArticles)
 
 module.exports = router;

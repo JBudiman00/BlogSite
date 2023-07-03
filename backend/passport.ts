@@ -29,9 +29,9 @@ passport.use(new JWTStrategy({
     secretOrKey   : process.env.JWTSECRET
     },
     function (jwtPayload: any, cb: any) {
+        console.log("HERE");
         //This function doesn't do anything
-        //Would be useful if I needed to extract specific information about individuals; but it's all the same settings
-        //and privledge for admins
+        //Would be useful if I needed to extract specific information about individuals; but it's all the same settings and privledge for admins
         return cb(null, "admin");
     }
 ));

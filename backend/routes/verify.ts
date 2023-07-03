@@ -5,6 +5,7 @@ export {};
 //Controllers
 const verifyController = require('../controllers/verifyController')
 
-router.post('/', verifyController.login);
+router.post('/login', verifyController.login);
+router.post('/refresh', verifyController.refresh)
 
 module.exports = router;
