@@ -1,11 +1,12 @@
 'use client'
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { NextPage } from 'next';
+import api from '../../components/axiosInstance';
 import { useRouter } from 'next/navigation';
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 
-export default function Home() {
+const Edit: NextPage = () => {
     const router = useRouter();
     const searchParams = useSearchParams();
     const [category, setCategory] = useState<string>("");
@@ -15,7 +16,14 @@ export default function Home() {
     const [content, setContent] = useState<string>("");
 
     useEffect(() => {
-        axios.get('http://localhost:8000/articles/' + searchParams.get("id"))
+        api.post('/auth/verify')
+        .catch((err: any) => {
+            if(err.response.status == 401){
+                router.push('/');
+            }
+        });
+
+        api.get('/articles/' + searchParams.get("id"))
         .then((item: any) => {
             setCategory(item.data.category);
             setType(item.data.type);
@@ -72,7 +80,7 @@ export default function Home() {
     const onSubmit = (e: any) => {
         e.preventDefault();
         //Submit post request to API
-        axios.patch('http://localhost:8000/articles/' + searchParams.get("id"), {
+        api.patch('/articles/' + searchParams.get("id"), {
             type: type,
             category: category,
             title: title,
@@ -160,3 +168,5 @@ export default function Home() {
         </div>
     );
 }
+
+export default Edit;

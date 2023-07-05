@@ -23,36 +23,37 @@ const login = (req, res, next) => __awaiter(void 0, void 0, void 0, function* ()
             const token = jwt.sign({ username: username }, process.env.JWTSECRET, { expiresIn: config_json_1.default.tokenLife });
             // const token = jwt.sign({username: username}, process.env.JWTSECRET);
             const refreshToken = jwt.sign({ username: username }, process.env.REFRESHSECRET, { expiresIn: config_json_1.default.refreshTokenLife });
-            return res.status(200).json({ "status": "Logged in", token, refreshToken });
+            res.cookie('token', token, { httpOnly: true });
+            res.cookie('refreshToken', refreshToken, { httpOnly: true });
+            // res.cookie('token', token, { httpOnly: false, secure: false }); //FOR DEVELOMENT PURPOSES ONLY
+            // res.cookie('refreshToken', refreshToken, { httpOnly: false });  //FOR DEVELOMENT PURPOSES ONLY
+            res.status(200).json({ "status": "Logged in", token, refreshToken });
         }
         else {
-            return res.status(401).json("Couldn't log in");
+            res.status(401).json({ "status": "Couldn't log in" });
         }
     }
     else {
-        return res.status(401).json("Couldn't log in");
+        res.status(401).json({ "status": "Couldn't log in" });
     }
 });
 const refresh = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const authHeader = req.headers.authorization;
     try {
-        if (authHeader && authHeader.startsWith('Bearer ')) {
-            const refreshToken = authHeader.substring(7); // Extract the token by removing 'Bearer ' prefix
-            // Verify the refresh token and extract the user ID
-            const { username } = jwt.verify(refreshToken, process.env.REFRESHSECRET);
-            console.log(username);
-            const accessToken = jwt.sign({ username: username }, process.env.JWTSECRET, { expiresIn: process.env.EXPIREJWT });
-            res.json({ accessToken });
-        }
-        else {
-            res.status(401).json("unauthorized");
-        }
+        const refreshToken = req.cookies.refreshToken;
+        const { username } = jwt.verify(refreshToken, process.env.REFRESHSECRET);
+        const accessToken = jwt.sign({ username: username }, process.env.JWTSECRET, { expiresIn: config_json_1.default.refreshTokenLife });
+        res.cookie('token', accessToken, { httpOnly: true });
+        return res.status(201).json({ "status": "Token Created" });
     }
     catch (err) {
         res.status(401).json({ error: err });
     }
 });
+const verify = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    res.status(201).json();
+});
 module.exports = {
     login,
-    refresh
+    refresh,
+    verify
 };

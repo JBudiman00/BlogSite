@@ -1,16 +1,26 @@
 'use client'
-import { useState } from 'react';
-import axios from 'axios';
+import { useState, useEffect } from 'react';
+import { NextPage } from 'next';
+import api from '../../components/axiosInstance';
 import { useRouter } from 'next/navigation';
 import Link from "next/link";
 
-export default function Home() {
+const Create: NextPage = () => {
     const router = useRouter();
     const [category, setCategory] = useState<string>("");
     const [type, setType] = useState<string>("");
     const [title, setTitle] = useState<string>("");
     const [summary, setSummary] = useState<string>("");
     const [content, setContent] = useState<string>("");
+
+    useEffect(() => {
+        api.post('/auth/verify')
+        .catch((err: any) => {
+            if(err.response.status == 401){
+                router.push('/');
+            }
+        });
+    }, [])
 
     const titleChange = (e: any) => {
         e.preventDefault();
@@ -52,7 +62,7 @@ export default function Home() {
             console.log("Not all fields filled out")
         } else {
             //Submit post request to API
-            axios.post('http://localhost:8000/articles', {
+            api.post('/articles', {
                 type: type,
                 category: category,
                 title: title,
@@ -133,3 +143,4 @@ export default function Home() {
         </div>
     );
 }
+export default Create;

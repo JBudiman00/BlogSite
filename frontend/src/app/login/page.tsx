@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react';
-import axios from 'axios';
+import api from '../components/axiosInstance';
 import { useRouter } from 'next/navigation';
 
 export default function Home() {
@@ -12,21 +12,18 @@ export default function Home() {
     const handleSubmit = (event: any) => {
         event.preventDefault();
         //Validate form
-        axios.post('http://localhost:8000/verify', {
+        api.post('/auth/login', {
             username: username,
             password: password
         })
-        .then((item: any) => {
-            //Filter down to only articles by Nathan
-            const result = item.data.verification;
-            if(result == true){
-                router.push('/admin')
-            }else {
-                setStatus(badLogin)
-            }
+        .then((i: any) => {
+            console.log(i.data);
+            setStatus(<></>)
+            router.push('/admin')
         })
         .catch((error: any) => {
             console.error(error);
+            setStatus(badLogin)
         });
     }
 

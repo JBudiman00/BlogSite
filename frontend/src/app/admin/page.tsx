@@ -1,17 +1,24 @@
 'use client'
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { NextPage } from 'next';
+import api from '../components/axiosInstance';
 import ArticleItem from '../interface/articleitem';
 import { useRouter } from 'next/navigation';
 
-export default function Home() {
+const AdminHome: NextPage = () => {
     const router = useRouter();
     const [articleList, setList] = useState<Array<ArticleItem>>([]);
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [idSelect, setID] = useState<number>();
     
     useEffect(() => {
-        axios.get('http://localhost:8000/articles')
+        api.post('/auth/verify')
+        .catch((err: any) => {
+            if(err.response.status == 401){
+                router.push('/');
+            }
+        });
+        api.get('/articles', { withCredentials: true })
         .then((item: any) => {
             setList(item.data);
         });
@@ -35,7 +42,7 @@ export default function Home() {
 
     const deleteClick = (e: any) => {
         e.preventDefault();
-        axios.delete('http://localhost:8000/articles/' + idSelect)
+        api.delete('/articles/' + idSelect)
         .then((item: any) => {
             setID(undefined);
             setIsOpen(false);
@@ -112,3 +119,6 @@ export default function Home() {
         </div>
     )
 }
+
+// export default IsAuth(AdminHome);
+export default AdminHome;

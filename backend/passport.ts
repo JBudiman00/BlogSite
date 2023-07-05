@@ -25,11 +25,19 @@ passport.use(new LocalStrategy({
 ));
 
 passport.use(new JWTStrategy({
-    jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
+    jwtFromRequest: ExtractJWT.fromExtractors([
+        (req: any) => {
+          let token = null;
+          if (req && req.cookies) {
+            token = req.cookies['token'];
+          }
+          return token;
+        }
+      ]),
     secretOrKey   : process.env.JWTSECRET
     },
     function (jwtPayload: any, cb: any) {
-        console.log("HERE");
+        
         //This function doesn't do anything
         //Would be useful if I needed to extract specific information about individuals; but it's all the same settings and privledge for admins
         return cb(null, "admin");

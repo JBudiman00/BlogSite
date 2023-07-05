@@ -3,11 +3,16 @@ const express = require('express');
 const dotenv = require('dotenv');
 const swaggerUi = require('swagger-ui-express'), swaggerDocument = require('../swagger');
 var cors = require('cors');
+const cookieParser = require('cookie-parser');
 // const passport = require('passport');
 // require('./passport');
 dotenv.config();
 const app = express();
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true,
+}));
+app.use(cookieParser());
 const port = process.env.PORT;
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
