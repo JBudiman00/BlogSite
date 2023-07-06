@@ -39,7 +39,7 @@ const postArticles = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         yield prisma.blogs.create({
             data: req.body
         });
-        res.send({ message: "Article successfully added" });
+        res.status(201).json();
     }
     catch (e) {
         console.error(e);
@@ -61,11 +61,11 @@ const updateArticles = (req, res) => __awaiter(void 0, void 0, void 0, function*
                 content: req.body.content || undefined,
             }
         });
-        res.json(result);
+        res.status(204).json();
     }
     catch (e) {
         console.error(e);
-        res.send({ error: e });
+        res.status(400).send({ error: e });
     }
 });
 const favArticle = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -87,25 +87,25 @@ const favArticle = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
                 is_featured: true
             }
         });
-        res.status(202).json();
+        res.status(204).json();
     }
     catch (e) {
         console.error(e);
-        res.send({ error: e });
+        res.status(400).send({ error: e });
     }
 });
 const deleteArticles = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const result = yield prisma.blogs.delete({
+        yield prisma.blogs.delete({
             where: {
                 ID: +req.params.id
             }
         });
-        res.send({ message: "Article successfully delete" });
+        res.status(204).json();
     }
     catch (e) {
         console.error(e);
-        res.send({ error: e });
+        res.status(400).send({ error: e });
     }
 });
 module.exports = {

@@ -1,25 +1,18 @@
 const e = require('express');
 const router = e.Router();
 const passport = require('passport');
-export {}
 require('../passport');
+export {}
 
 //Controllers
 const articlesController = require('../controllers/articlesController')
 
+//Schemas
 /**
  * @swagger
- * paths:
- *   /articles:
- *     get:
- *       summmary: Get all article information
- *       responses:
- *         200:
- *           description: OK
- *           content:
- *             application/json:
- *               schema:
- *                 $ref: '#/components/schemas/Articles'
+ * tags:
+ *   - name: Articles
+ *   - description: Operations related to articles
  * components:
  *   schemas:
  *     Articles:
@@ -62,6 +55,52 @@ const articlesController = require('../controllers/articlesController')
  *         createdAt: 2023-06-26T10:53:15.000Z
  *         updatedAt: 2023-06-26T10:53:15.000Z
  *         content: Fill in article content here
+ *     PostArticle:
+ *       type: object
+ *       required:
+ *         - type
+ *         - category
+ *         - title
+ *         - summmary
+ *       properties:
+ *         type:
+ *           type: enum
+ *           description: Article section (Nathan, Chloe, Chloe+Nathan)
+ *         category:
+ *           type: enum
+ *           description: Article type (life, food, )
+ *         title:
+ *           type: string
+ *           description: Title of article
+ *         summary:
+ *           type: string
+ *           description: Short summary about article
+ *       example:
+ *         type: Nathan
+ *         category: life
+ *         title: Daily Life
+ *         summary: A POV into Nathan's Daily Life
+ *         content: Fill in article content here
+ */
+
+/**
+ * @swagger
+ * paths:
+ *   /articles:
+ *     get:
+ *       summary: Get all article information
+ *       tags: 
+ *         - Articles
+ *       responses:
+ *         200:
+ *           description: OK
+ *           content:
+ *             application/json:
+ *               schema:
+ *                 type: array
+ *                 items:
+ *                   oneOf:
+ *                     - $ref: '#/components/schemas/Articles'
  */
 router.get('/', articlesController.getArticles);
 
@@ -70,7 +109,9 @@ router.get('/', articlesController.getArticles);
  * paths:
  *   /articles/:id:
  *     get:
- *       summmary: Get article information by id
+ *       summary: Get article information by id
+ *       tags: 
+ *         - Articles
  *       parameters:
  *         - in: path
  *           name: id
@@ -93,65 +134,84 @@ router.get('/:id', articlesController.getBlog);
  * paths:
  *   /articles:
  *     post:
- *       summmary: Post article information to database
+ *       summary: Post article information to database
+ *       tags: 
+ *         - Articles
  *       requestBody:
  *         description: Required components of creating an Article
  *         required: true
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Articles'
+ *               $ref: '#/components/schemas/PostArticle'
  *       responses:
- *         200:
- *           description: OK
- *           content:
- *             application/json:
- *               schema:
- *                 type: object
- *                 properties:
- *                   message: 
- *                     type: string
- *               example:
- *                 message: Article successfully added
+ *         201:
+ *           description: Article successfully added
  */
 router.post('/', passport.authenticate('jwt', {session: false}), articlesController.postArticles);
 
 /**
  * @swagger
  * paths:
- *   /articles:
+ *   /articles/:id:
  *     patch:
- *       summmary: Update article information in database               
+ *       summary: Update article information in database 
+ *       tags: 
+ *         - Articles   
+ *       parameters:
+ *         - in: path
+ *           name: id
+ *           schema:
+ *             type: integer
+ *           required: true
+ *           description: Unique numerical ID of blog article           
  *       responses:
- *         200:
- *           description: OK
- *           content:
- *             application/json:
- *               schema:
- *                 $ref: '#/components/schemas/Articles'
+ *         204:
+ *           description: Article successfully updated
+ *         400:
+ *           description: Request has bad syntax or inherently impossible to be satisfied
+ *           example:
  */
 router.patch('/:id', passport.authenticate('jwt', {session: false}), articlesController.updateArticles)
 
+/**
+ * @swagger
+ * paths:
+ *   /articles/fav/:id:
+ *     patch:
+ *       summary: Update highlighted article   
+ *       tags: 
+ *         - Articles
+ *       parameters:
+ *         - in: path
+ *           name: id
+ *           schema:
+ *             type: integer
+ *           required: true
+ *           description: Unique numerical ID of blog article           
+ *       responses:
+ *         204:
+ *           description: Article successfully highlighted
+ *         400:
+ *           description: Request has bad syntax or inherently impossible to be satisfied
+ *           example:
+ */
 router.patch('/fav/:id', passport.authenticate('jwt', {session: false}), articlesController.favArticle)
 
 /**
  * @swagger
  * paths:
- *   /articles:
+ *   /articles/:id:
  *     delete:
- *       summmary: Delete article information in database by ID
+ *       summary: Delete article information in database by ID
+ *       tags: 
+ *         - Articles
  *       responses:
- *         200:
- *           description: Request handled successfully
- *           content:
- *             application/json:
- *               schema:
- *                 type: object
- *                 properties:
- *                   message: 
- *                     type: string
- *               example:
- *                 message: Article successfully delete 
+ *         204:
+ *           description: Article successfully highlighted
+ *         400:
+ *           description: Request has bad syntax or inherently impossible to be satisfied
+ *           example:
  */
 router.delete('/:id', passport.authenticate('jwt', {session: false}), articlesController.deleteArticles)
 

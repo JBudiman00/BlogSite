@@ -51,7 +51,7 @@ const refresh = (req, res, next) => __awaiter(void 0, void 0, void 0, function* 
     }
 });
 const verify = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    res.status(201).json();
+    res.status(200).json();
 });
 module.exports = {
     login,

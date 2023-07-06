@@ -31,7 +31,7 @@ const postArticles = async (req: any, res: any) => {
         await prisma.blogs.create({
             data: req.body
         })
-        res.send({message: "Article successfully added"})
+        res.status(201).json();
     } catch (e: any) {
         console.error(e);
         res.send(e);
@@ -53,10 +53,10 @@ const updateArticles = async (req: any, res: any) => {
                 content: req.body.content || undefined,
             }
         })
-        res.json(result)
+        res.status(204).json();
     } catch (e: any) {
         console.error(e);
-        res.send({error: e});
+        res.status(400).send({error: e});
     }
 }
 
@@ -79,24 +79,24 @@ const favArticle = async (req: any, res: any) => {
                 is_featured: true
             }
         });
-        res.status(202).json();
+        res.status(204).json();
     } catch (e: any) {
         console.error(e);
-        res.send({error: e});
+        res.status(400).send({error: e});
     }
 }
 
 const deleteArticles = async (req: any, res:any) => {
     try{
-        const result = await prisma.blogs.delete({
+        await prisma.blogs.delete({
             where: {
                 ID: +req.params.id
             }
         })
-        res.send({message: "Article successfully delete"})
+        res.status(204).json();
     } catch (e: any) {
         console.error(e);
-        res.send({error: e});
+        res.status(400).send({error: e});
     }
 }
 

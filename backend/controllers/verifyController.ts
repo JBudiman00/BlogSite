@@ -38,7 +38,7 @@ const refresh = async (req: any, res: any, next: any) => {
 }
 
 const verify = async (req: any, res: any, next: any) => {
-    res.status(201).json();
+    res.status(200).json();
 }
 
 module.exports = {
