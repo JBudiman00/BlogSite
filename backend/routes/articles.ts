@@ -132,6 +132,8 @@ router.post('/', passport.authenticate('jwt', {session: false}), articlesControl
  */
 router.patch('/:id', passport.authenticate('jwt', {session: false}), articlesController.updateArticles)
 
+router.patch('/fav/:id', passport.authenticate('jwt', {session: false}), articlesController.favArticle)
+
 /**
  * @swagger
  * paths:

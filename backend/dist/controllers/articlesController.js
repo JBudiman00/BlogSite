@@ -20,7 +20,8 @@ const getArticles = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
             title: true,
             summary: true,
             createdAt: true,
-            updatedAt: true
+            updatedAt: true,
+            is_featured: true
         }
     });
     res.send(result);
@@ -67,6 +68,32 @@ const updateArticles = (req, res) => __awaiter(void 0, void 0, void 0, function*
         res.send({ error: e });
     }
 });
+const favArticle = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const fav = req.params.id;
+        yield prisma.blogs.updateMany({
+            where: {
+                is_featured: true
+            },
+            data: {
+                is_featured: false
+            }
+        });
+        yield prisma.blogs.update({
+            where: {
+                ID: +fav
+            },
+            data: {
+                is_featured: true
+            }
+        });
+        res.status(202).json();
+    }
+    catch (e) {
+        console.error(e);
+        res.send({ error: e });
+    }
+});
 const deleteArticles = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const result = yield prisma.blogs.delete({
@@ -86,5 +113,6 @@ module.exports = {
     getBlog,
     postArticles,
     updateArticles,
-    deleteArticles
+    deleteArticles,
+    favArticle
 };

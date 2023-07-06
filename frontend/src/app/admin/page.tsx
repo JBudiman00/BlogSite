@@ -49,6 +49,36 @@ const AdminHome: NextPage = () => {
         })
     }
 
+    const favIcon = (status: boolean, id: number) => {
+        if(!status){
+            return(
+                <div className="border border-black m-1 p-1 w-10 pt-2" onClick={e => favChange(e, id)}>
+                    Fav
+                </div>
+            );
+        } else {
+            return(
+                <div className="border border-black bg-[#8cff32] m-1 p-1 w-10 pt-2">
+                    Fav
+                </div>
+            );
+        }
+    }
+
+    const favChange = (e: any, id: number) => {
+        e.preventDefault();
+        api.patch('/articles/fav/' + id);
+        //Manually edit local list to reduce API calls and rerendering
+        const tempList = articleList.map((i: ArticleItem) => {
+            i.is_featured = false;
+            if(i.ID == id){
+                i.is_featured = true;
+            }
+            return i
+        });
+        setList(tempList);
+    }
+
     return(
         <div className="flex justify-center">
             <div className="w-2/3">
@@ -70,7 +100,7 @@ const AdminHome: NextPage = () => {
                         <p className="border border-black w-28">CreatedAt</p>
                         <p className="border border-black w-28">UpdatedAt</p>
                         <p className="border border-black w-64">Summary</p>
-                        <p className="border border-black w-28">Options</p>
+                        <p className="border border-black w-36">Options</p>
                     </div>
                     {articleList.map((item: ArticleItem) => {
                         return (
@@ -82,9 +112,10 @@ const AdminHome: NextPage = () => {
                                 <p className="border border-black w-28">{new Date(item.createdAt).toLocaleString()}</p>
                                 <p className="border border-black w-28">{new Date(item.updatedAt ? item.updatedAt: "").toLocaleString()}</p>
                                 <p className="border border-black w-64">{item.summary}</p>
-                                <div className="flex flex-row border justify-around border-black w-28">
-                                    <img src="editicon.png" className="border border-black m-1 p-1 bg-yellow w-10" onClick={e => editClick(e, item.ID)}/>
-                                    <img src="deleteicon.png" className="border border-black m-1 p-1 bg-yellow w-10" onClick={e => deleteToggle(e, item.ID)}/>
+                                <div className="flex flex-row border justify-around border-black w-36">
+                                    <img src="editicon.png" className="border border-black m-1 p-1 w-10" onClick={e => editClick(e, item.ID)}/>
+                                    <img src="deleteicon.png" className="border border-black m-1 p-1 w-10" onClick={e => deleteToggle(e, item.ID)}/>
+                                    {favIcon(item.is_featured, item.ID)}
                                 </div>
                             </div>
                         );
@@ -120,5 +151,4 @@ const AdminHome: NextPage = () => {
     )
 }
 
-// export default IsAuth(AdminHome);
 export default AdminHome;

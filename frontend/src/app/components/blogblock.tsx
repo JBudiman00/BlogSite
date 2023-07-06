@@ -10,7 +10,7 @@ export default function BlogBlock (props: blogblock) {
     return (
         <div className="flex flex-col justify-center items-center w-1/4">
             <p className="text-2xl text-center">{props.title}</p>
-            <div className="flex flex-col jusifty-center bg-[#9F825B] border-[#82614A] border-2 rounded-lg">
+            <div className="flex flex-col justify-center bg-[#9F825B] border-[#82614A] border-2 rounded-lg">
                 <Link href={({
                     pathname: "/blog",
                     query: { id: props.id}

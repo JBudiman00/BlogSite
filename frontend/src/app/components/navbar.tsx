@@ -13,7 +13,7 @@ export default function NavBar () {
     ].join(' ');
 
     return (
-        <div className="grid grid-cols-8 bg-[#DAC09B] h-16 sticky text-[#82614A]">
+        <div className="grid grid-cols-8 bg-[#DAC09B] h-16 sticky text-[#82614A] w-full">
             <div className="flex flex-row col-span-7 items-stretch">
                 <div 
                     className={tabElement}
@@ -49,9 +49,9 @@ export default function NavBar () {
             <div className="flex flex-row col-span-1 justify-end">
                 <div 
                     className={tabElement}
-                    onClick={() => router.push('/')}    
+                    onClick={() => router.push('/about')}    
                 >
-                    <p className="text-lg ">Contact</p>
+                    <p className="text-lg">About</p>
                 </div>
             </div>
         </div>

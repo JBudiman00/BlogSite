@@ -6,4 +6,5 @@ export default interface ArticleItem {
     summary: string,
     createdAt: string,
     updatedAt: string | null,
+    is_featured: boolean
 }

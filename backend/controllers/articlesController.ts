@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
-const getArticles = async (req: Request, res: any) => {
+const getArticles = async (req: any, res: any) => {
     const result = await prisma.blogs.findMany({
         select: {
             ID: true,
@@ -10,7 +10,8 @@ const getArticles = async (req: Request, res: any) => {
             title: true,
             summary: true,
             createdAt: true,
-            updatedAt: true
+            updatedAt: true,
+            is_featured: true
         }
     }); 
     res.send(result);
@@ -59,6 +60,32 @@ const updateArticles = async (req: any, res: any) => {
     }
 }
 
+const favArticle = async (req: any, res: any) => {
+    try{
+        const fav = req.params.id;
+        await prisma.blogs.updateMany({
+            where: {
+                is_featured: true
+            },
+            data: {
+                is_featured: false
+            }
+        });
+        await prisma.blogs.update({
+            where: {
+                ID: +fav
+            },
+            data: {
+                is_featured: true
+            }
+        });
+        res.status(202).json();
+    } catch (e: any) {
+        console.error(e);
+        res.send({error: e});
+    }
+}
+
 const deleteArticles = async (req: any, res:any) => {
     try{
         const result = await prisma.blogs.delete({
@@ -78,5 +105,6 @@ module.exports = {
     getBlog,
     postArticles,
     updateArticles,
-    deleteArticles
+    deleteArticles,
+    favArticle
 }

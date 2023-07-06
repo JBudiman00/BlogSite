@@ -23,10 +23,10 @@ const login = (req, res, next) => __awaiter(void 0, void 0, void 0, function* ()
             const token = jwt.sign({ username: username }, process.env.JWTSECRET, { expiresIn: config_json_1.default.tokenLife });
             // const token = jwt.sign({username: username}, process.env.JWTSECRET);
             const refreshToken = jwt.sign({ username: username }, process.env.REFRESHSECRET, { expiresIn: config_json_1.default.refreshTokenLife });
-            res.cookie('token', token, { httpOnly: true });
-            res.cookie('refreshToken', refreshToken, { httpOnly: true });
-            // res.cookie('token', token, { httpOnly: false, secure: false }); //FOR DEVELOMENT PURPOSES ONLY
-            // res.cookie('refreshToken', refreshToken, { httpOnly: false });  //FOR DEVELOMENT PURPOSES ONLY
+            // res.cookie('token', token, { httpOnly: true });
+            // res.cookie('refreshToken', refreshToken, { httpOnly: true });
+            res.cookie('token', token, { httpOnly: false, secure: false }); //FOR DEVELOMENT PURPOSES ONLY
+            res.cookie('refreshToken', refreshToken, { httpOnly: false }); //FOR DEVELOMENT PURPOSES ONLY
             res.status(200).json({ "status": "Logged in", token, refreshToken });
         }
         else {
@@ -40,6 +40,7 @@ const login = (req, res, next) => __awaiter(void 0, void 0, void 0, function* ()
 const refresh = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const refreshToken = req.cookies.refreshToken;
+        console.log(req.cookies);
         const { username } = jwt.verify(refreshToken, process.env.REFRESHSECRET);
         const accessToken = jwt.sign({ username: username }, process.env.JWTSECRET, { expiresIn: config_json_1.default.refreshTokenLife });
         res.cookie('token', accessToken, { httpOnly: true });

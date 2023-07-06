@@ -20,13 +20,21 @@ model Blogs {
   createdAt DateTime @default(now())
   updatedAt DateTime?
   content String @db.MediumText
+  is_featured Boolean @default(false)
   image Images[]
+  thumbnail Thumbnail?
 }
 
 model Images {
   blog   Blogs @relation(fields: [blogID], references: [ID])
   blogID Int 
   Image String @unique
+}
+
+model Thumbnail {
+  blog   Blogs          @relation(fields: [blogID], references: [ID])
+  blogID Int            @unique
+  ThumbnailImage String
 }
 
 enum Brand {
