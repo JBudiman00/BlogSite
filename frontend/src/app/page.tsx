@@ -63,7 +63,7 @@ export default function Home() {
         <div className="h-6"></div>
         <div className="flex flex-row">
           <div className="bg-[#D0BCA0] pt-12 px-6 rounded-xl">
-            <p className="text-5xl text-center">Chloe & Nathan's blog site</p>
+            <p className="text-5xl text-center">Chloe & Nathan&apos;s blog site</p>
             <div className="h-6"></div>
             <p className="text-xl leading-loose px-24">We founded this website in 2023 to share out adventures,
               both personally and as a couple. We write about our average lives
