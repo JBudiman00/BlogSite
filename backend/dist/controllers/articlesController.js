@@ -24,6 +24,7 @@ const getArticles = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
             is_featured: true
         }
     });
+    res.cookie('TestCookie', "testCookieJSON");
     res.send(result);
 });
 const getBlog = (req, res) => __awaiter(void 0, void 0, void 0, function* () {

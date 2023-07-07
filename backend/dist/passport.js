@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-//passport.js
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const passportJWT = require("passport-jwt");

@@ -14,6 +14,7 @@ const getArticles = async (req: any, res: any) => {
             is_featured: true
         }
     }); 
+    res.cookie('TestCookie', "testCookieJSON");
     res.send(result);
 }
 
