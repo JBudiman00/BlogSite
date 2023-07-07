@@ -10,7 +10,7 @@ dotenv.config();
 
 const app = express();
 app.use(cors({
-    origin: "https://chloe-nathan-blog-site.vercel.app/", 
+    origin: "*", 
     credentials: true, 
 }));
 app.use(cookieParser());
@@ -38,3 +38,5 @@ app.use(
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
 });
+
+module.exports = app;
