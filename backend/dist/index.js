@@ -9,7 +9,7 @@ const cookieParser = require('cookie-parser');
 dotenv.config();
 const app = express();
 app.use(cors({
-    origin: "https://chloe-nathan-blog-site.vercel.app",
+    origin: ["https://chloe-nathan-blog-site.vercel.app", "http://localhost:3000"],
     credentials: true,
 }));
 app.use(cookieParser());
