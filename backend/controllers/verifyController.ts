@@ -9,10 +9,9 @@ const login = async (req: any, res: any, next: any) => {
     if(username === process.env.ADMINUSER){
         if(password === process.env.PASSWORD){
             const token = jwt.sign({username: username}, process.env.JWTSECRET, { expiresIn: config.tokenLife });
-            // const token = jwt.sign({username: username}, process.env.JWTSECRET);
             const refreshToken = jwt.sign({username: username}, process.env.REFRESHSECRET, { expiresIn: config.refreshTokenLife})
-            res.cookie('token', token, { httpOnly: false, sameSite: 'None', secure: true }); //FOR DEVELOMENT PURPOSES ONLY
-            res.cookie('refreshToken', refreshToken, { httpOnly: false, sameSite: 'None', secure: true });  //FOR DEVELOMENT PURPOSES ONLY
+            res.cookie('token', token, { httpOnly: true, sameSite: 'None', secure: true }); //FOR DEVELOMENT PURPOSES ONLY
+            res.cookie('refreshToken', refreshToken, { httpOnly: true, sameSite: 'None', secure: true });  //FOR DEVELOMENT PURPOSES ONLY
             res.status(200).json({"status": "Logged in", token, refreshToken});
         } else {
             res.status(401).json({"status": "Couldn't log in"})
