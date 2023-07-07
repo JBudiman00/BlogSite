@@ -9,7 +9,7 @@ const cookieParser = require('cookie-parser');
 dotenv.config();
 const app = express();
 app.use(cors({
-    origin: 'http://localhost:3000',
+    origin: "https://chloe-nathan-blog-site.vercel.app",
     credentials: true,
 }));
 app.use(cookieParser());
@@ -27,3 +27,4 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.listen(port, () => {
     console.log(`[server]: Server is running at http://localhost:${port}`);
 });
+module.exports = app;

@@ -10,7 +10,7 @@ dotenv.config();
 
 const app = express();
 app.use(cors({
-    origin: "*", 
+    origin: "https://chloe-nathan-blog-site.vercel.app", 
     credentials: true, 
 }));
 app.use(cookieParser());
