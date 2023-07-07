@@ -10,9 +10,9 @@ dotenv.config();
 
 const app = express();
 app.use(cors({
-    origin: "https://blog-site-jbudiman00.vercel.app", 
+    origin: "https://chloe-nathan-blog-site.vercel.app/", 
     credentials: true, 
-}))
+}));
 app.use(cookieParser());
 const port = process.env.PORT;
 
