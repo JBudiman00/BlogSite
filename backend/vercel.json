@@ -7,7 +7,7 @@
         "config": { "includeFiles": ["dist/**"] }
       }
     ],
-    "routes": [
+    "rewrites": [
       {
         "src": "/(.*)",
         "dest": "dist/index.js"
@@ -15,7 +15,7 @@
     ],
     "headers": [
       {
-        "source": "/dist/idnex.js",
+        "source": "/dist/index.js",
         "headers": [
           { "key": "Access-Control-Allow-Credentials", "value": "true" },
           { "key": "Access-Control-Allow-Origin", "value": "https://chloe-nathan-blog-site.vercel.app" },
