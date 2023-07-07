@@ -1,12 +1,12 @@
 import axios, {  AxiosRequestConfig } from 'axios';
 
 const api = axios.create({
-    baseURL: 'http://localhost:8000',
+    baseURL: 'https://chloe-nathan-blog-api.vercel.app',
     withCredentials: true
 });
 
 const axiosRefresh = axios.create({
-  baseURL: 'http://localhost:8000',
+  baseURL: 'https://chloe-nathan-blog-api.vercel.app',
   withCredentials: true
 });
 

@@ -2,7 +2,7 @@
 import BlogBlock from './components/blogblock'
 import { useEffect, useState } from 'react'
 import ArticleItem from './interface/articleitem';
-import axios from 'axios';
+import api from './components/axiosInstance';
 import BlogHighlight from './components/bloghighlight';
 
 export default function Home() {
@@ -14,7 +14,7 @@ export default function Home() {
   const [highlight, setHighlight] = useState<ArticleItem | null>(null);
 
   useEffect(() => {
-    axios.get('http://localhost:8000/articles')
+    api.get('/articles')
         .then((e: any) => {
             const articleList = e.data;
             //Get Nathan's most recent blog

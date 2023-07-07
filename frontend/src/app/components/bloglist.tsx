@@ -1,6 +1,6 @@
 'use client'
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import api from '../components/axiosInstance';
 import BlogDisplay from './blogdisplay';
 import BlogList from './blogitem';
 import ArticleItem from '../interface/articleitem';
@@ -10,7 +10,7 @@ export default function Home(props: any) {
     const [filteredArticles, setFilter] = useState<Array<ArticleItem>>([]);
 
     useEffect(() => {
-        axios.get('http://localhost:8000/articles')
+        api.get('/articles')
         .then((item: any) => {
             //Filter down to only articles by Nathan
             const result = item.data.filter((i: any) => {

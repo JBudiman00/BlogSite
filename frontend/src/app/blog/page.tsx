@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react';
 import { useSearchParams } from "next/navigation";
-import axios from 'axios';
+import api from '../components/axiosInstance';
 
 export interface Article {
     ID: number,
@@ -21,7 +21,7 @@ export default function Home() {
     const [date, setDate] = useState<Date | null>(null);
 
     useEffect(() => {
-        axios.get('http://localhost:8000/articles/' + searchParams.get("id"))
+        api.get('/articles/' + searchParams.get("id"))
         .then((item: any) => {
             setArticle(item.data);
             if(item.data.type === "Nathan"){
