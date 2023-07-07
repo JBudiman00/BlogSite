@@ -10,7 +10,7 @@ dotenv.config();
 
 const app = express();
 app.use(cors({
-    origin:  'http://localhost:3000', 
+    origin:  ['http://localhost:3000', "https://blog-site-jbudiman00.vercel.app"], 
     credentials: true, 
 }))
 app.use(cookieParser());
