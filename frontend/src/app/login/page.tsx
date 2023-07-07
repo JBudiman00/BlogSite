@@ -29,7 +29,7 @@ export default function Home() {
 
     const badLogin = () => {
         return (
-            <div className="bg-[#EF9A9A] border border-[#F44336] h-12">
+            <div className="bg-[#EF9A9A] border border-[#F44336] h-10">
                 <p className="text-center">Incorrect username/login</p>
             </div>
         );

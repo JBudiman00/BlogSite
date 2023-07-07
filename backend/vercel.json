@@ -17,7 +17,8 @@
       {
         "source": "/(.*)",
         "headers": [
-          { "key": "Access-Control-Allow-Origin", "value": "https://chloe-nathan-blog-site.vercel.app" }
+          { "key": "Access-Control-Allow-Origin", "value": "https://chloe-nathan-blog-site.vercel.app" },
+          { "key": "Access-Control-Allow-Origin", "value": "http://localhost:3000" }
         ]
       }
   ]
