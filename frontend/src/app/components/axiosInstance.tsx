@@ -1,18 +1,16 @@
 import axios, {  AxiosRequestConfig } from 'axios';
 //https://chloe-nathan-blog-api.vercel.app
 const api = axios.create({
-    baseURL: 'http://localhost:8000',
+    // baseURL: 'http://localhost:8000',
+    baseURL: 'https://chloe-nathan-blog-api.vercel.app',
     withCredentials: true
 });
 
 const axiosRefresh = axios.create({
-  baseURL: 'http://localhost:8000',
+  // baseURL: 'http://localhost:8000',
+  baseURL: 'https://chloe-nathan-blog-api.vercel.app',
   withCredentials: true
 });
-
-interface AxiosConfig extends AxiosRequestConfig {
-    retryCount?: boolean
-}
 
 api.interceptors.response.use(
     (response) => {
