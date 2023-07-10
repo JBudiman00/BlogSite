@@ -2,6 +2,24 @@
 Developing a frontend blog website to track me and my girlfriends adventures. 
 
 Version 1.0
+
+Tech Stack:
+Frontend - Next.JS, Tailwind CSS
+Backend - Express.JS
+ORM - Prisma
+Database - MySQL
+
+Platform:
+The frontend is hosted on Vercel and the backend uses serverless functions from Vercel. 
+
+Security Authentication:
+Secure JWT Authentication is used for admin login. An http-only access token and refresh token is generated.
+The access token has a lifespan of 15 minutes to reduce security threat vulnerabilites, with the refresh token serving to allow
+users to get new tokens without having to relog into the system. The passport library was used to make this possible. 
+
+Color Scheme:
+Taken from a template on Figma: https://www.figma.com/file/YYJNV4iBowwdagGVS1tbeB/Neutral-color-palette-inspiration-(Community)?type=design&node-id=0-1&mode=design&t=VRmvzCKe7T0KHeBb-0
+
 Features:
   
 &nbsp;&nbsp;&nbsp;&nbsp;-Home page (Recent, Random, featured blogs)
@@ -29,23 +47,5 @@ Features:
 
 &nbsp;&nbsp;&nbsp;&nbsp;-Swagger API documentation 
 ![image](https://github.com/JBudiman00/BlogSite/assets/65978976/4732e95f-ac4b-42b4-96df-d181ce9b0f1d)
-
-
-Tech Stack:
-Frontend - Next.JS, Tailwind CSS
-Backend - Express.JS
-ORM - Prisma
-Database - MySQL
-
-Platform:
-The frontend is hosted on Vercel and the backend uses serverless functions from Vercel. 
-
-Security Authentication:
-Secure JWT Authentication is used for admin login. An http-only access token and refresh token is generated.
-The access token has a lifespan of 15 minutes to reduce security threat vulnerabilites, with the refresh token serving to allow
-users to get new tokens without having to relog into the system. The passport library was used to make this possible. 
-
-Color Scheme:
-Taken from a template on Figma: https://www.figma.com/file/YYJNV4iBowwdagGVS1tbeB/Neutral-color-palette-inspiration-(Community)?type=design&node-id=0-1&mode=design&t=VRmvzCKe7T0KHeBb-0
 
 Message me with questions and details! I'm currently working on V1.1 to fix bugs and issues I noticed when deploying the server initially and plan to add image support. 
