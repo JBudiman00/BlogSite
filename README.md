@@ -2,7 +2,9 @@
 Developing a frontend blog website to track me and my girlfriends adventures. 
 
 Version 1.0
+
 https://chloe-nathan-blog-site.vercel.app/ 
+
 Tech Stack:
 
 &nbsp;&nbsp;&nbsp;&nbsp;Frontend - Next.JS, Tailwind CSS
