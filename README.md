@@ -14,7 +14,7 @@ Tech Stack:
 &nbsp;&nbsp;&nbsp;&nbsp;Database - MySQL
 
 Platform:
-The frontend is hosted on Vercel and the backend uses serverless functions from Vercel. 
+The frontend is hosted on Vercel, the backend uses serverless functions from Vercel and the database is on Hostinger. 
 
 Security Authentication:
 Secure JWT Authentication is used for admin login. An http-only access token and refresh token is generated.
