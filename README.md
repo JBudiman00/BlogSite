@@ -5,18 +5,31 @@ Version 1.0
 Features:
   
 &nbsp;&nbsp;&nbsp;&nbsp;-Home page (Recent, Random, featured blogs)
-  
+![image](https://github.com/JBudiman00/BlogSite/assets/65978976/9467375d-ad63-493c-b0c9-055310d94e42)
+
 &nbsp;&nbsp;&nbsp;&nbsp;-Nav Bar tabs (Access Nathan, Chloe, Chloe+Nathan tabs)
+![image](https://github.com/JBudiman00/BlogSite/assets/65978976/084546fd-5dc7-46ba-a7ec-be9a8f70291f)
+
 
 &nbsp;&nbsp;&nbsp;&nbsp;-Search page (Basic description for each blog + searching by name)
+![image](https://github.com/JBudiman00/BlogSite/assets/65978976/99d8b8c3-bd44-403b-8f8f-55649579d068)
 
 &nbsp;&nbsp;&nbsp;&nbsp;-Blog page (View blog)
+![image](https://github.com/JBudiman00/BlogSite/assets/65978976/b8a5f470-d98b-4f23-b0da-dd1badde324c)
 
 &nbsp;&nbsp;&nbsp;&nbsp;-Admin Login page (Secure JWT authentication with access token and refresh token cookies)
+![image](https://github.com/JBudiman00/BlogSite/assets/65978976/cbf1cca5-2860-4132-9e2c-fad50555209b)
+
 
 &nbsp;&nbsp;&nbsp;&nbsp;-Admin Control Page (Create, Read, Edit and Delete blogs from custom Admin UI)
+![image](https://github.com/JBudiman00/BlogSite/assets/65978976/f3d79c91-6422-49f5-a32c-b3870c597d0b)
+![image](https://github.com/JBudiman00/BlogSite/assets/65978976/1bb230d4-0376-4ef6-962b-cca55d426e42)
+![image](https://github.com/JBudiman00/BlogSite/assets/65978976/ab4bdef9-54ad-4e4b-8c0f-96c75d3c83d9)
+
 
 &nbsp;&nbsp;&nbsp;&nbsp;-Swagger API documentation 
+![image](https://github.com/JBudiman00/BlogSite/assets/65978976/4732e95f-ac4b-42b4-96df-d181ce9b0f1d)
+
 
 Tech Stack:
 Frontend - Next.JS, Tailwind CSS
