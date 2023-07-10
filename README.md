@@ -4,10 +4,14 @@ Developing a frontend blog website to track me and my girlfriends adventures.
 Version 1.0
 
 Tech Stack:
-Frontend - Next.JS, Tailwind CSS
-Backend - Express.JS
-ORM - Prisma
-Database - MySQL
+
+&nbsp;&nbsp;&nbsp;&nbsp;Frontend - Next.JS, Tailwind CSS
+
+&nbsp;&nbsp;&nbsp;&nbsp;Backend - Express.JS
+
+&nbsp;&nbsp;&nbsp;&nbsp;ORM - Prisma
+
+&nbsp;&nbsp;&nbsp;&nbsp;Database - MySQL
 
 Platform:
 The frontend is hosted on Vercel and the backend uses serverless functions from Vercel. 
