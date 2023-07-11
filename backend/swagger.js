@@ -18,9 +18,9 @@ const options = {
         email: "jbudiman@purdue.edu",
       }
     },
-    basePath: 'http://localhost:8000',
+    basePath: 'https://chloe-nathan-blog-api.vercel.app/',
   },
-  apis: ['./routes/*.ts'], // Specify the path to your route files
+  apis: ['./dist/routes/*.js'], // Specify the path to your route files
 };
 
 const specs = swaggerJsDoc(options);
