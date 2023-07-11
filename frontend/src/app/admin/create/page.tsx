@@ -29,6 +29,7 @@ const Create: NextPage = () => {
 
     const categoryChange = (e: any) => {
         e.preventDefault();
+        if(e.target.value)
         setCategory(e.target.value);
     }
 
@@ -105,7 +106,7 @@ const Create: NextPage = () => {
                                 <option value=""></option>
                                 <option value="Nathan">Nathan</option>
                                 <option value="Chloe">Chloe</option>
-                                <option value="chloeNathan">Chloe+Nathan</option>
+                                <option value="ChloeNathan">Chloe+Nathan</option>
                             </select>
                         </div>
                         <div className="flex flex-row mb-2">

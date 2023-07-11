@@ -17,6 +17,7 @@ export default function Home() {
     api.get('/articles')
         .then((e: any) => {
             const articleList = e.data;
+
             //Get Nathan's most recent blog
             const nathanList = articleList.filter((item: ArticleItem) => item.type === "Nathan")
             const articleNathan = getRecent(nathanList);
@@ -29,7 +30,6 @@ export default function Home() {
             const cnList = articleList.filter((item: ArticleItem) => item.type === "ChloeNathan")
             const articleCN = getRecent(cnList);
             setRecentCN(articleCN.ID);
-
             //Get article highlight
             articleList.forEach((i: ArticleItem) => {
               if(i.is_featured === true){

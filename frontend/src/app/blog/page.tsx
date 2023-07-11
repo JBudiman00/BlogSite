@@ -38,13 +38,14 @@ export default function Home() {
 
     return (
         <div className="flex justify-center text-[#82614A]">
-            <div className="w-2/3">
+            <div className="w-2/3 min-h-[calc(100vh-257px)]">
                 <div className="h-6"></div>
                 <p className="text-5xl">{article?.title}</p>
+                <div className="h-4"></div>
                 <p className="text-lg">Created by {type}</p>
                 <p className="text-lg">Date: {date?.toLocaleString()}</p>
                 <div className="h-6"></div>
-                <div className="whitespace-pre-wrap text-lg">
+                <div className="whitespace-pre-wrap text-lg leading-10">
                     {article?.content}
                 </div>
                 <div className="h-6"></div>
