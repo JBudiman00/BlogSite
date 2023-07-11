@@ -21,20 +21,20 @@ model Blogs {
   updatedAt DateTime?
   content String @db.MediumText
   is_featured Boolean @default(false)
-  image Images[]
+  gallery Images[]
   thumbnail Thumbnail?
 }
 
 model Images {
   blog   Blogs @relation(fields: [blogID], references: [ID])
   blogID Int 
-  Image String @unique
+  image String @unique
 }
 
 model Thumbnail {
   blog   Blogs          @relation(fields: [blogID], references: [ID])
   blogID Int            @unique
-  ThumbnailImage String
+  thumbnailImage String
 }
 
 enum Brand {

@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const e = require('express');
-const router = e.Router();
+const express = require('express');
+const router = express.Router();
 const passport = require('passport');
 require('../passport');
 //Controllers

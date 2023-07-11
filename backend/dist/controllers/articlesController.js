@@ -49,7 +49,7 @@ const postArticles = (req, res) => __awaiter(void 0, void 0, void 0, function* (
 });
 const updateArticles = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const result = yield prisma.blogs.update({
+        yield prisma.blogs.update({
             where: {
                 ID: +req.params.id
             },

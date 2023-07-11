@@ -41,7 +41,7 @@ const postArticles = async (req: any, res: any) => {
 
 const updateArticles = async (req: any, res: any) => {
     try{
-        const result = await prisma.blogs.update({
+        await prisma.blogs.update({
             where: {
                 ID: +req.params.id
             },

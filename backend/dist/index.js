@@ -4,8 +4,6 @@ const dotenv = require('dotenv');
 const swaggerUi = require('swagger-ui-express'), swaggerDocument = require('../swagger');
 var cors = require('cors');
 const cookieParser = require('cookie-parser');
-// const passport = require('passport');
-// require('./passport');
 dotenv.config();
 const app = express();
 app.use(cors({
@@ -18,12 +16,16 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 const articlesRouter = require('./routes/articles');
 const verifyRouter = require('./routes/verify');
+const photosRouter = require('./routes/photos');
 app.use('/articles', articlesRouter);
 app.use('/auth', verifyRouter);
+app.use('/photos', photosRouter);
 app.get('/', (req, res) => {
-    res.send('Nathan\'s API');
+    res.send('Chloe+Nathan Blog API');
 });
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/api-docs', swaggerUi.serve, 
+// swaggerUi.setup(swaggerDocument),
+swaggerUi.setup(swaggerDocument, { customCssUrl: "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css" }));
 app.listen(port, () => {
     console.log(`[server]: Server is running at http://localhost:${port}`);
 });
