@@ -20,7 +20,7 @@ const options = {
     },
     basePath: 'https://chloe-nathan-blog-api.vercel.app/',
   },
-  apis: ['./dist/routes/*.js'], // Specify the path to your route files
+  apis: [__dirname + '/dist/routes/*.js'], // Specify the path to your route files
 };
 
 const specs = swaggerJsDoc(options);
