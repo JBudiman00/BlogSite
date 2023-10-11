@@ -1,10 +1,5 @@
-import ArticleItem from "../interface/articleitem";
+import {Bloghighlightprops} from "@/types/blogTypes";
 import Link from "next/link";
-
-interface Bloghighlightprops {
-    data: ArticleItem | null,
-    title: string
-}
 
 export default function Home(props: Bloghighlightprops) {
     return (

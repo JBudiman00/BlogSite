@@ -36,7 +36,7 @@ export default function BottomBar () {
             </div>
             <div className="h-3"></div>
             <div className="flex flex-row h-14 justify-center">
-                <img src="/insta.png" className="m-2 h-10"/>
+                <a href="https://www.instagram.com/n8budiman/"><img src="/insta.png" className="m-2 h-10"/></a>
                 <a href="https://github.com/JBudiman00/BlogSite" target="_blank"><img src="/github.png" className="m-2 h-10" /></a>
                 <img src="/mail.png" className="m-2 h-10" onClick={() => window.location.href = 'mailto:jbudiman@purdue.edu'}/>
             </div>

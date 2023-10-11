@@ -1,10 +1,5 @@
 import Link from "next/link";
-
-interface blogblock {
-    title: string,
-    img_link: string,
-    id: number
-}
+import {blogblock} from '../types/blogTypes'
 
 export default function BlogBlock (props: blogblock) {
     return (

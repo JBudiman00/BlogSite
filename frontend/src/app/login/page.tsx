@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react';
-import api from '../components/axiosInstance';
+import api from '../../api/axiosInstance';
 import { useRouter } from 'next/navigation';
 
 export default function Home() {

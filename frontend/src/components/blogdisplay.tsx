@@ -1,17 +1,13 @@
 import { useState, useEffect } from 'react';
-import ArticleItem from '../interface/articleitem';
-interface blogdisplay{
-    initialList: ArticleItem[],
-    setFilter: any
-    filteredArticles: any
-}
+import { blogdisplay, articleItem } from '@/types/blogTypes';
+
 
 export default function BlogDisplay (props: blogdisplay) {
     const [query, setQuery] = useState<string>("");
 
     //Update search feature and ensure synchronization
     useEffect(() => {
-        const filteredOptions = props.initialList.filter((i: ArticleItem) => {
+        const filteredOptions = props.initialList.filter((i: articleItem) => {
             if (query === ""){
                 return true
             } else{

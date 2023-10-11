@@ -1,13 +1,13 @@
 'use client'
 import { useEffect, useState } from 'react';
 import { NextPage } from 'next';
-import api from '../components/axiosInstance';
-import ArticleItem from '../interface/articleitem';
+import api from '../../api/axiosInstance';
+import {articleItem} from '@/types/blogTypes';
 import { useRouter } from 'next/navigation';
 
 const AdminHome: NextPage = () => {
     const router = useRouter();
-    const [articleList, setList] = useState<Array<ArticleItem>>([]);
+    const [articleList, setList] = useState<Array<articleItem>>([]);
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [idSelect, setID] = useState<number>();
     
@@ -43,7 +43,7 @@ const AdminHome: NextPage = () => {
     const deleteClick = (e: any) => {
         e.preventDefault();
         api.delete('/articles/' + idSelect)
-        .then((item: any) => {
+        .then(() => {
             setID(undefined);
             setIsOpen(false);
         })
@@ -52,13 +52,13 @@ const AdminHome: NextPage = () => {
     const favIcon = (status: boolean, id: number) => {
         if(!status){
             return(
-                <div className="border border-black m-1 p-1 w-10 pt-2" onClick={e => favChange(e, id)}>
+                <div className="border border-black m-1 p-1 w-10 h-10 pt-2" onClick={e => favChange(e, id)}>
                     Fav
                 </div>
             );
         } else {
             return(
-                <div className="border border-black bg-[#8cff32] m-1 p-1 w-10 pt-2">
+                <div className="border border-black bg-[#8cff32] m-1 p-1 h-10 w-10 pt-2">
                     Fav
                 </div>
             );
@@ -69,7 +69,7 @@ const AdminHome: NextPage = () => {
         e.preventDefault();
         api.patch('/articles/fav/' + id);
         //Manually edit local list to reduce API calls and rerendering
-        const tempList = articleList.map((i: ArticleItem) => {
+        const tempList = articleList.map((i: articleItem) => {
             i.is_featured = false;
             if(i.ID == id){
                 i.is_featured = true;
@@ -102,7 +102,7 @@ const AdminHome: NextPage = () => {
                         <p className="border border-black w-64">Summary</p>
                         <p className="border border-black w-36">Options</p>
                     </div>
-                    {articleList.map((item: ArticleItem) => {
+                    {articleList.map((item: articleItem) => {
                         return (
                             <div key={item.ID} className="flex flex-row">
                                 <p className="border border-black w-12 text-center">{item.ID}</p>
@@ -113,8 +113,8 @@ const AdminHome: NextPage = () => {
                                 <p className="border border-black w-28">{new Date(item.updatedAt ? item.updatedAt: "").toLocaleString()}</p>
                                 <p className="border border-black w-64">{item.summary}</p>
                                 <div className="flex flex-row border justify-around border-black w-36">
-                                    <img src="editicon.png" className="border border-black m-1 p-1 w-10" onClick={e => editClick(e, item.ID)}/>
-                                    <img src="deleteicon.png" className="border border-black m-1 p-1 w-10" onClick={e => deleteToggle(e, item.ID)}/>
+                                    <img src="editicon.png" className="border border-black m-1 p-1 w-10 h-10" onClick={e => editClick(e, item.ID)}/>
+                                    <img src="deleteicon.png" className="border border-black m-1 p-1 w-10 h-10" onClick={e => deleteToggle(e, item.ID)}/>
                                     {favIcon(item.is_featured, item.ID)}
                                 </div>
                             </div>
@@ -139,7 +139,7 @@ const AdminHome: NextPage = () => {
                                     className="text-gray-500 hover:text-gray-800"
                                     onClick={(e:any) => setIsOpen(false)}
                                 >
-                                    Close
+                                    Cancel
                                 </button>
                             </div>
                         </div>

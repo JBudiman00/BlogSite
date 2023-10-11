@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react';
 import { useSearchParams } from "next/navigation";
-import api from '../components/axiosInstance';
+import api from '../../api/axiosInstance';
 
 export interface Article {
     ID: number,

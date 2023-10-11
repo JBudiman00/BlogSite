@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react';
 import { NextPage } from 'next';
-import api from '../../components/axiosInstance';
+import api from '../../../api/axiosInstance';
 import { useRouter } from 'next/navigation';
 import Link from "next/link";
 
