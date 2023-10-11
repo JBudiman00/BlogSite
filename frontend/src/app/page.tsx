@@ -1,7 +1,7 @@
 'use client'
 import BlogBlock from '../components/blogblock'
 import { useEffect, useState } from 'react'
-import ArticleItem from './interface/articleitem';
+import {articleItem} from '@/types/blogTypes';
 import api from '../api/axiosInstance';
 import BlogHighlight from '../components/bloghighlight';
 
@@ -10,8 +10,8 @@ export default function Home() {
   const [recentNathan, setRecentNathan] = useState<number>(0);
   const [recentChloe, setRecentChloe] = useState<number>(0);
   const [recentCN, setRecentCN] = useState<number>(0);
-  const [random, setRandom] = useState<ArticleItem | null>(null);
-  const [highlight, setHighlight] = useState<ArticleItem | null>(null);
+  const [random, setRandom] = useState<articleItem | null>(null);
+  const [highlight, setHighlight] = useState<articleItem | null>(null);
 
   useEffect(() => {
     api.get('/articles')
@@ -19,19 +19,19 @@ export default function Home() {
             const articleList = e.data;
 
             //Get Nathan's most recent blog
-            const nathanList = articleList.filter((item: ArticleItem) => item.type === "Nathan")
+            const nathanList = articleList.filter((item: articleItem) => item.type === "Nathan")
             const articleNathan = getRecent(nathanList);
             setRecentNathan(articleNathan.ID);
             //Get Chloe's most recent blog
-            const chloeList = articleList.filter((item: ArticleItem) => item.type === "Chloe")
+            const chloeList = articleList.filter((item: articleItem) => item.type === "Chloe")
             const articleChloe = getRecent(chloeList);
             setRecentChloe(articleChloe.ID);
             //Get Chloe + Nathan's most recent blog
-            const cnList = articleList.filter((item: ArticleItem) => item.type === "ChloeNathan")
+            const cnList = articleList.filter((item: articleItem) => item.type === "ChloeNathan")
             const articleCN = getRecent(cnList);
             setRecentCN(articleCN.ID);
             //Get article highlight
-            articleList.forEach((i: ArticleItem) => {
+            articleList.forEach((i: articleItem) => {
               if(i.is_featured === true){
                 setHighlight(i);
                 return;
@@ -47,8 +47,8 @@ export default function Home() {
         });
   }, []);
 
-  const getRecent = (data: Array<ArticleItem>) => {
-    const recent = data.reduce((prevObj: ArticleItem, currObj: ArticleItem) => {
+  const getRecent = (data: Array<articleItem>) => {
+    const recent = data.reduce((prevObj: articleItem, currObj: articleItem) => {
       const prevDate = new Date(prevObj.createdAt);
       const currDate = new Date(currObj.createdAt);
       return currDate > prevDate ? currObj: prevObj;
