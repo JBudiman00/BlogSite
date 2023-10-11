@@ -1,9 +1,9 @@
 'use client'
-import BlogBlock from './components/blogblock'
+import BlogBlock from '../components/blogblock'
 import { useEffect, useState } from 'react'
 import ArticleItem from './interface/articleitem';
-import api from './components/axiosInstance';
-import BlogHighlight from './components/bloghighlight';
+import api from '../api/axiosInstance';
+import BlogHighlight from '../components/bloghighlight';
 
 export default function Home() {
   //UseState to store article ID for links to other pages 

@@ -1,4 +1,4 @@
-import axios, {  AxiosRequestConfig } from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 //https://chloe-nathan-blog-api.vercel.app
 const api = axios.create({
     // baseURL: 'http://localhost:8000',
